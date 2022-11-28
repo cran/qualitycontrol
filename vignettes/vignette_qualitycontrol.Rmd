@@ -1,0 +1,80 @@
+---
+title: "qualitycontrol"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{arrary2lstmarray}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE, eval = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# `qualitycontrol`
+
+
+The goal of `qualitycontrol` is to set a data quality control framework
+
+## Installation
+
+You can install the `qualitycontrol` from [GitHub](https://github.com/) with:
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("luisgarcez11/qualitycontrol")
+```
+
+### Data
+
+The `als_data` dataset will be used to guide you through the package functionality. This data is not real, but based on data retrieved from Amyotrophic Lateral Sclerosis patients.
+
+```{r example, eval = TRUE}
+library(qualitycontrol)
+als_data
+```
+
+### QC mapping 
+
+The `als_data_qc_mapping` is an `R list` which contains 3 tables specifying all the tests used for quality control.
+
+#### Missing
+```{r}
+als_data_qc_mapping$missing
+```
+
+#### Inconsistencies
+```{r}
+als_data_qc_mapping$inconsistencies
+```
+
+#### Out of range values
+```{r}
+als_data_qc_mapping$range
+```
+
+
+### `qc_data` function
+
+`qc_data` takes as arguments the data to be quality controlled and the QC mapping containing the tests to be applied.
+
+```{r}
+qc_data(als_data, als_data_qc_mapping)
+```
+
+ This will return a table with all the findings. If you want to save it, you can specify the path to be saved in `output_file`.
